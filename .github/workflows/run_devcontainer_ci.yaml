@@ -35,7 +35,7 @@ jobs:
         run: |
           echo Workflow: ${{ github.workflow }}
           echo Branch: ${{ github.ref }}
-          echo Tag: ${{ github.ref_name }}
+          echo Ref name: ${{ github.ref_name }}
           echo Commit: ${{ github.sha }}
           echo Building devcontainer for ${{ matrix.devcontainer }}
 
