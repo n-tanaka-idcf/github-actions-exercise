@@ -21,10 +21,10 @@ Dev Container を使わずに実行する場合は、上記ツールをそれぞ
 
 ## セットアップ（推奨: Dev Container）
 
-1. VS Code でこのリポジトリを開く
-2. Dev Containers で `github-actions` を起動
-3. 起動後、`postCreateCommand` により `aqua` が実行され、必要な CLI が入ります
+1. Dev Container 用の環境変数ファイルを作成する
 
+   ```bash
+   cp .devcontainer/.env.example .devcontainer/.env
 Dev Container の設定は `.devcontainer/github-actions/devcontainer.json` にあります。
 
 ## 使い方
