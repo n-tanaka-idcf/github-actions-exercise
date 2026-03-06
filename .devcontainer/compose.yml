@@ -1,0 +1,14 @@
+---
+services:
+  github-actions:
+    build:
+      context: github-actions/
+      dockerfile: Dockerfile
+      args:
+        - UID
+        - GID
+    tty: true
+    stdin_open: true
+    restart: always
+    volumes:
+      - ../:/workspaces

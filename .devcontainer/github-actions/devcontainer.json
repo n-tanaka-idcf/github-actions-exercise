@@ -1,0 +1,66 @@
+{
+    "name": "github-actions",
+    "dockerComposeFile": [
+        "../compose.yml"
+    ],
+    "service": "github-actions",
+    "runServices": [
+        "github-actions"
+    ],
+    "containerEnv": {
+        "DEVCONTAINER_NAME": "github-actions",
+        "DEVCONTAINER_USER": "vscode",
+        "EDITOR": "code --wait",
+        "LC_ALL": "C.UTF-8",
+        "TZ": "Asia/Tokyo"
+    },
+    "remoteEnv": {
+        "PATH": "/home/${containerEnv:DEVCONTAINER_USER}/.local/share/aquaproj-aqua/bin:${containerEnv:PATH}",
+        "AQUA_CONFIG": "${containerWorkspaceFolder}/.devcontainer/${containerEnv:DEVCONTAINER_NAME}/aqua.yaml"
+    },
+    "remoteUser": "vscode",
+    "workspaceFolder": "/workspaces",
+    "features": {
+        "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {},
+        "ghcr.io/devcontainers/features/sshd:1": {},
+        "ghcr.io/aquaproj/devcontainer-features/aqua-installer:0.1.6": {
+            "aqua_version": "v2.51.2"
+        }
+    },
+    "postCreateCommand": "bash -c './.devcontainer/$DEVCONTAINER_NAME/postCreateCommand.sh'",
+    "customizations": {
+        "vscode": {
+            "settings": {
+                // Editor
+                "editor.formatOnSave": true,
+                // Files
+                "files.insertFinalNewline": true,
+                "files.trimFinalNewlines": true,
+                "files.trimTrailingWhitespace": true,
+                // Github Actions
+                "[github-actions-workflow]": {
+                    "editor.tabSize": 2,
+                    "editor.defaultFormatter": "redhat.vscode-yaml"
+                },
+                // Terminal
+                "terminal.integrated.scrollback": 10000,
+                // TODO: 設定が反映されないので調査
+                "terminal.integrated.suggest.enabled": true,
+                // YAML
+                "[yaml]": {
+                    "editor.tabSize": 2,
+                    "editor.defaultFormatter": "redhat.vscode-yaml"
+                }
+            },
+            "extensions": [
+                // Docker
+                "ms-azuretools.vscode-docker",
+                "exiasr.hadolint",
+                // Github Actions
+                "github.vscode-github-actions",
+                // YAML
+                "redhat.vscode-yaml"
+            ]
+        }
+    }
+}

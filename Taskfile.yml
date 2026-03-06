@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+
+version: "3"
+
+tasks:
+  default:
+    desc: Displays all available tasks.
+    cmds:
+      - task --list-all --sort none
+
+  environment:check:
+    desc: Check required tools are available for this environment.
+    cmds:
+      - actionlint --version
+      - ghalint --version
+      - git --version
+      - hadolint --version
+      - ssh -V
+      - task --version
+      - zizmor --version
+
+  lint:
+    desc: Lint all files.
+    deps:
+      - task: lint:gha
+
+  lint:gha:
+    desc: Lint GitHub Actions files.
+    deps:
+      - lint:gha:actionlint
+      - lint:gha:ghalint
+      - lint:gha:zizmor
+
+  lint:gha:actionlint:
+    cmds:
+      - actionlint
+
+  lint:gha:ghalint:
+    cmds:
+      - ghalint run
+      - ghalint run-action
+
+  lint:gha:zizmor:
+    cmds:
+      - zizmor .
