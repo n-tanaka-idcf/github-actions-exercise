@@ -15,6 +15,6 @@ RUN apt-get update && \
 
 RUN groupadd --gid ${GID} ${GROUP} && \
     useradd --uid ${UID} --gid ${GID} --groups sudo --shell /bin/bash --create-home ${USER} && \
-    echo "$USER ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+    echo "$USER ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/$USER && chmod 0440 /etc/sudoers.d/$USER && visudo -cf /etc/sudoers.d/$USER
 
 USER ${USER}
