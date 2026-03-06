@@ -8,6 +8,12 @@ on:
     paths:
       - .github/workflows/run_devcontainer_ci.yaml
       - .devcontainer/**
+  pull_request:
+    branches:
+      - "*"
+    paths:
+      - .github/workflows/run_devcontainer_ci.yaml
+      - .devcontainer/**
 
 defaults:
   run:
